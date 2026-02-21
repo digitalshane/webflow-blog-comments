@@ -29,7 +29,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as {
+      name?: string;
+      comment?: string;
+      slug?: string;
+    };
     const { name, comment, slug } = body;
 
     if (!slug || typeof slug !== "string" || !slug.trim()) {
