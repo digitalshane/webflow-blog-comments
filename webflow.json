@@ -1,0 +1,16 @@
+{
+  "cloud": {
+    "framework": "nextjs"
+  },
+  "devlink": {
+    "rootDir": "./src/devlink",
+    "cssModules": true
+  },
+  "telemetry": {
+    "global": {
+      "allowTelemetry": false,
+      "lastPrompted": 1771643655866,
+      "version": "1.9.0"
+    }
+  }
+}
