@@ -34,7 +34,7 @@ async function getCommentsCollectionId(): Promise<string> {
     throw new Error(`Failed to fetch collections: ${res.status} ${await res.text()}`);
   }
 
-  const data = await res.json();
+  const data = (await res.json()) as { collections?: { id: string; displayName: string }[] };
   const collection = data.collections?.find(
     (c: { displayName: string }) =>
       c.displayName.toLowerCase() === "comments"
@@ -95,7 +95,7 @@ export async function getComments(postSlug?: string): Promise<CommentItem[]> {
       throw new Error(`Failed to fetch comments: ${res.status} ${await res.text()}`);
     }
 
-    const data = await res.json();
+    const data = (await res.json()) as { items?: WebflowItem[] };
     const pageItems: WebflowItem[] = data.items ?? [];
     items.push(...pageItems.map(mapItem));
 
@@ -140,6 +140,6 @@ export async function createComment(input: {
     throw new Error(`Failed to create comment: ${res.status} ${await res.text()}`);
   }
 
-  const item: WebflowItem = await res.json();
+  const item = (await res.json()) as WebflowItem;
   return mapItem(item);
 }
