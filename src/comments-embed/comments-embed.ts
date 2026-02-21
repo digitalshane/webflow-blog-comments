@@ -89,20 +89,23 @@ function setCookie(name: string, value: string) {
 // ---------------------------------------------------------------------------
 
 function discoverApiBase(): string {
+  // Derive the base from the script's own URL.
+  // e.g. https://domain/comments/comments-embed.min.js -> https://domain/comments
   const scripts = document.querySelectorAll("script[src]");
   for (let i = 0; i < scripts.length; i++) {
     const src = (scripts[i] as HTMLScriptElement).src;
     if (src.includes("comments-embed")) {
       try {
         const url = new URL(src);
-        return url.origin + "/app";
+        const pathDir = url.pathname.substring(0, url.pathname.lastIndexOf("/"));
+        return url.origin + pathDir;
       } catch {
         // ignore parse errors
       }
     }
   }
   // Fallback: same origin
-  return window.location.origin + "/app";
+  return window.location.origin;
 }
 
 // ---------------------------------------------------------------------------
