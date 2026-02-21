@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "node scripts/build-comments-embed.mjs",
+    "build:embed": "node scripts/build-comments-embed.mjs",
     "start": "next start",
     "lint": "next lint",
     "deploy": "webflow cloud deploy",
@@ -17,6 +19,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "esbuild": "^0.24.0",
     "@cloudflare/workers-types": "^4.20250415.0",
     "@eslint/eslintrc": "^3",
     "@opennextjs/cloudflare": "^1.6.5",
